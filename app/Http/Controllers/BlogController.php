@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
 
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+
     private function articles(): array
 {
     return [
@@ -152,4 +155,25 @@ Non parto da zero: parto da tutta la mia esperienza.',
 
         return view('articles.show', compact('article'));
     }
+
+    public function contact()
+{
+
+    return view('contact'); // GET
+}
+
+public function contactSubmit(Request $request)
+{
+    $user= $request->input('user');
+    $email= $request->input('email');
+    $message= $request->input('message');
+
+    try{
+        Mail::to($email)->send(new ContactMail());
+    } catch(Exception $e){
+        return redirect()->route('home')->with('emailError', 'Si è verificato un errore durante l\'invio del messaggio. Riprova più tardi.');
+    }
+    return redirect (route('home'))->with('emailSent', 'Messaggio inviato con successo!');
+ 
+}
 }

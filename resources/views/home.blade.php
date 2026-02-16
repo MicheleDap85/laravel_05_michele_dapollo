@@ -9,6 +9,17 @@
 <body>
     <x-layout>
 
+    @if(session()->has('emailSent'))
+    <div class="alert alert-success">
+        {{ session('emailSent') }}
+    </div>
+    @endif
+    @if(session()->has('emailError'))
+    <div class="alert alert-danger">
+        {{ session('emailError') }}
+    </div>
+    @endif
+
 
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container py-5">

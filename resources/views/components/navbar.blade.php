@@ -15,6 +15,9 @@
                         Articoli
                     </a>
         </li>
+       <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ route('contact') }}">Contattami</a>
+        </li>
     
     </div>
   </div>
